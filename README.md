@@ -10,6 +10,30 @@ export AWS_ACCESS_KEY_ID=""
 export AWS_SECRET_ACCESS_KEY=""
 ```
 
+### Set the permission for the User IAM
+
+Here the list of permissions that you need to deploy the infrastructur
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:*",
+                "eks:*",
+                "iam:*",
+                "autoscaling:*",
+                "elasticloadbalancing:*",
+                "ecr:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
 ### Deploy the terraform
 ```bash
 terraform init
