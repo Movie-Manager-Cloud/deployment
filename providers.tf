@@ -37,6 +37,7 @@ provider "aws" {
     region = var.region
 }
 
+data "aws_availability_zones" "available" {}
 
 # provider "helm" {
 #     alias = "euwest1"
@@ -49,21 +50,21 @@ provider "aws" {
 #     }
 # }
 
-provider "kubernetes" {
-  alias                  = "euwest1"
-  host                   = module.eks.cluster_endpoint
-  client_certificate     = base64decode(module.eks.kubeconfig.0.client_certificate)
-  client_key             = base64decode(module.eks.kubeconfig.0.client_key)
-  cluster_ca_certificate = base64decode(module.eks.kubeconfig.0.cluster_ca_certificate)
-}
+# provider "kubernetes" {
+#   alias                  = "euwest1"
+#   host                   = module.eks.cluster_endpoint
+#   client_certificate     = base64decode(module.eks.kubeconfig.0.client_certificate)
+#   client_key             = base64decode(module.eks.kubeconfig.0.client_key)
+#   cluster_ca_certificate = base64decode(module.eks.kubeconfig.0.cluster_ca_certificate)
+# }
 
-provider "helm" {
-  alias                  = "euwest1"
-  kubernetes {
-    host                   = module.eks.cluster_endpoint
-    client_certificate     = base64decode(module.eks.kubeconfig.0.client_certificate)
-    client_key             = base64decode(module.eks.kubeconfig.0.client_key)
-    cluster_ca_certificate = base64decode(module.eks.kubeconfig.0.cluster_ca_certificate)
-  }
+# provider "helm" {
+#   alias                  = "euwest1"
+#   kubernetes {
+#     host                   = module.eks.cluster_endpoint
+#     client_certificate     = base64decode(module.eks.kubeconfig.0.client_certificate)
+#     client_key             = base64decode(module.eks.kubeconfig.0.client_key)
+#     cluster_ca_certificate = base64decode(module.eks.kubeconfig.0.cluster_ca_certificate)
+#   }
  
-}
+# }
