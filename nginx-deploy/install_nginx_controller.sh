@@ -1,8 +1,12 @@
+NGINX_EIP=$(terraform output -raw nginx_eip)
+
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
 kubectl create namespace ingress-nginx
-helm install nginx-controller ingress-nginx/ingress-nginx --namespace ingress-nginx
+helm install nginx-controller ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx \
+  --set controller.service.annotations."service\.beta\.kubernetes\.io/aws-load-balancer-type"="alb"
 
 echo "Waiting for the nginx-controller to be ready"
 kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s

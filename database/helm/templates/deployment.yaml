@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image:  "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ACCEPT_EULA
+              value: "{{ .Values.env.ACCEPT_EULA }}"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-secret
+                  key: POSTGRES_PASSWORD
+            - name : POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-secret
+                  key: POSTGRES_DB
+          volumeMounts:
+            - name: sql-script
+              mountPath: /docker-entrypoint-initdb.d/create_tables.sql
+              subPath: SqlCmdScript.sql
+      volumes:
+        - name: sql-script
+          configMap:
+            name: {{ .Chart.Name }}-config
