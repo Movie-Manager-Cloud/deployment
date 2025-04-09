@@ -24,7 +24,7 @@ resource "aws_eks_node_group" "worker-node-group" {
   node_group_name = "devops-workernodes"
   node_role_arn  = aws_iam_role.workernodes.arn
    subnet_ids = [aws_subnet.devops1.id, aws_subnet.devops2.id]
-  instance_types = ["t3.medium"]
+  instance_types = ["t3.small"]
  
   scaling_config {
    desired_size = 1
