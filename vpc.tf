@@ -16,6 +16,7 @@ resource "aws_subnet" "devops1" {
   tags = tomap({
     "Name"                                   = "terraform-eks-devops-node",
     "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/role/elb" = "1"
   })
 }
 
@@ -28,6 +29,7 @@ resource "aws_subnet" "devops2" {
   tags = tomap({
     "Name"                                   = "terraform-eks-devops-node",
     "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/role/elb" = "1"
   })
 }
 

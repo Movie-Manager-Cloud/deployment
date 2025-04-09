@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "devops-eks" {
- name = "devops-cluster"
+ name = "${var.cluster-name}"
  role_arn = aws_iam_role.eks-iam-role.arn
 
  vpc_config {
