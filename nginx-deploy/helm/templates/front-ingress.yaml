@@ -6,6 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
   name: redirect-front-ingress
   namespace: default
 spec:
@@ -13,12 +14,12 @@ spec:
   rules:
   - http:
       paths:
-      - path: /front
+      - path: /
         pathType: ImplementationSpecific
         backend:
           service:
-            name: web #TODO: Change this to the name of the service when we have it
+            name: frontend #TODO: Change this to the name of the service when we have it
             port: 
-              number: 80
+              number: 8080
 
   

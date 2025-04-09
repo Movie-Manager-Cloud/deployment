@@ -1,0 +1,17 @@
+image:
+  repository: moviemanagercloud
+  name: front-interface
+  tag: latest
+
+service:
+  type: ClusterIP
+  protocol: TCP
+  port: 8080
+
+resources:
+  limits:
+    cpu: "0.2"
+    memory: "250Mi"
+  requests:
+    cpu: "0.1"
+    memory: "100Mi"
