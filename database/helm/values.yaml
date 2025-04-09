@@ -1,0 +1,22 @@
+image:
+  repository: moviemanagercloud
+  name: db-postgres
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 5432
+
+env:
+  ACCEPT_EULA: "Y"
+
+secrets:
+  POSTGRES_USER: "totolastico"
+  POSTGRES_PASSWORD: "4AL5DxL9!iW"
+  POSTGRES_DB: "movie_manager"
+
+volumes:
+  - name: sql-script
+    configMap:
+      name: sql-script

@@ -16,21 +16,21 @@ Here the list of permissions that you need to deploy the infrastructur
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2:*",
-                "eks:*",
-                "iam:*",
-                "autoscaling:*",
-                "elasticloadbalancing:*",
-                "ecr:*"
-            ],
-            "Resource": "*"
-        }
-    ]
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:*",
+				"eks:*",
+				"iam:*",
+				"autoscaling:*",
+				"elasticloadbalancing:*",
+				"ecr:*"
+			],
+			"Resource": "*"
+		}
+	]
 }
 ```
 
