@@ -60,6 +60,9 @@ Simply run the following command to deploy all ressources for your application w
 
 The helm part for back-end,database and front-end will be moove in the futur to their respective repository, and Github secret wil be use to pass throw the organisation the secret that are necessary to let helm connect to the cluster.
 
+### Access the application with the load balancer host
+When you deploy the helms, on your console you'll have the host output, you just need to copy past it in your web browser
+
 ## Destroy all the ressources
 
 It is very important to follow the next commands in orders, else you'll have some ressources left on your amazon
