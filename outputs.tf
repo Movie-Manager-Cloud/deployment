@@ -21,7 +21,7 @@ output "cluster_name" {
 #   description = "Elastic IP for the Nginx Load Balancer"
 # }
 
-output "load_balancer_dns" {
-  value       = aws_lb.eks_lb.dns_name
-  description = "The DNS name of the load balancer"
-}
+# output "load_balancer_dns" {
+#   value       = aws_lb.eks_lb.dns_name
+#   description = "The DNS name of the load balancer"
+# }
