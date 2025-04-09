@@ -62,12 +62,15 @@ The helm part for back-end,database and front-end will be moove in the futur to 
 
 ### Access the application with the load balancer host
 When you deploy the helms, on your console you'll have the host output, you just need to copy past it in your web browser
-
+```bash
+Waiting for Load Balancer external hostname...
+Load Balancer Hostname: [random].eu-west-1.elb.amazonaws.com
+```
 ## Destroy all the ressources
 
 It is very important to follow the next commands in orders, else you'll have some ressources left on your amazon
 
-```bash
+```text
 ./delete_helm.sh
 terraform destroy
 ```
