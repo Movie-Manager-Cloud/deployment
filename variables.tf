@@ -9,3 +9,7 @@ variable "cluster-name" {
   type    = string
 }
 
+variable "run_id" {
+  description = "The GitHub Actions run ID"
+  type        = string
+}
