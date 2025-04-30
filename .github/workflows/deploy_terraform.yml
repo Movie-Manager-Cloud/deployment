@@ -20,10 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Artifact Encrypted
     steps:
-      - name: Mask Inputs
-        run: |
-          echo "::add-mask::${{ github.event.inputs.aws_access_key_id }}"
-          echo "::add-mask::${{ github.event.inputs.aws_secret_access_key }}"
+      - uses: levibostian/action-hide-sensitive-inputs@v1
 
       - name: Checkout repository
         uses: actions/checkout@v4
