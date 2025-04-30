@@ -7,13 +7,13 @@ statements:
       # === Subject Pattern examples ===
       #
       # grant access to jobs running on the main branch
-      - repo:${origin}:ref:refs/heads/main
+      #- repo:${origin}:ref:refs/heads/main
       # grant access jobs running on any tag starting with a v
       # - repo:${origin}:ref:refs/tags/v*
       # grant access to jobs using production environment
       # - repo:${origin}:environment:production
       # grant access to jobs of a specific workflow file
-      # - repo:${origin}:workflow_ref:${origin}/.github/workflows/build.yml@refs/heads/main
+      - repo:${origin}:workflow_ref:${origin}/.github/workflows/destroy_terraform.yml@refs/heads/main
 
       # === Subject Pattern Variables and Wildcards ===
       #
