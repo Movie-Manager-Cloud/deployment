@@ -26,6 +26,11 @@ jobs:
       id-token: write
     name: Artifact Decrypted
     steps:
+      - name: Mask Inputs
+        run: |
+          echo "::add-mask::${{ github.event.inputs.aws_access_key_id }}"
+          echo "::add-mask::${{ github.event.inputs.aws_secret_access_key }}"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
