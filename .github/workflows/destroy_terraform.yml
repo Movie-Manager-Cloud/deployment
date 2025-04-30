@@ -1,0 +1,45 @@
+name: Destroy Terraform
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_destroy:
+        description: 'Confirm Destroy'
+        required: true
+        default: 'yes'
+
+jobs:
+  artifact_decrypted:
+    runs-on: ubuntu-latest
+    name: Artifact Encrypted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Encrypted Artifact & Decrypt Artifact
+        uses: badgerhobbs/terraform-state@v2
+        with:
+          encryption_key: ${{ secrets.encryption_key }}
+          operation: download
+          location: artifact
+          # github_token: ${{ secrets.gh_access_token }}
+        continue-on-error: true
+
+      - name: Configure Terraform
+        uses: hashicorp/setup-terraform@v3
+      
+      - name: Check Confirm Destroy Input
+        if: ${{ github.event.inputs.confirm_destroy != 'yes' }}
+        run: |
+          echo "Destroy not confirmed. Exiting..."
+          exit 1
+      
+      - name: Destroy Terraform
+        run: terraform destroy -auto-approve -var="run_id=${{ github.run_id }}"
+
+      - name: Encrypt Artifact & Upload Encrypted Artifact
+        uses: badgerhobbs/terraform-state@v2
+        with:
+          encryption_key: ${{ secrets.encryption_key }}
+          operation: upload
+          location: artifact
+          # github_token: ${{ secrets.gh_access_token }}

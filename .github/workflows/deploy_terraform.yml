@@ -1,0 +1,55 @@
+name: Deploy Terraform
+on:
+  workflow_dispatch:
+    inputs:
+      aws_access_key_id:
+          description: 'AWS Access Key ID'
+          required: true
+          default: ''
+      aws_secret_access_key:
+        description: 'AWS Secret Access Key'
+        required: true
+        default: ''
+
+env:
+  AWS_SECRET_ACCESS_KEY: ${{ github.event.inputs.aws_secret_access_key }}
+  AWS_ACCESS_KEY_ID: ${{ github.event.inputs.aws_access_key_id }}
+
+jobs:
+  artifact_encrypted:
+    runs-on: ubuntu-latest
+    name: Artifact Encrypted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Encrypted Artifact & Decrypt Artifact
+        uses: badgerhobbs/terraform-state@v2
+        with:
+          encryption_key: ${{ secrets.encryption_key }}
+          operation: download
+          location: artifact
+          # github_token: ${{ secrets.gh_access_token }}
+        continue-on-error: true
+
+      - name: Configure Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Run Terraform Plan
+        run: |
+          terraform plan -var="run_id=${{ github.run_id }}"
+
+      - name: Run Terraform Apply
+        run: |
+          terraform apply -auto-approve -var="run_id=${{ github.run_id }}"
+
+      - name: Encrypt Artifact & Upload Encrypted Artifact
+        uses: badgerhobbs/terraform-state@v2
+        with:
+          encryption_key: ${{ secrets.encryption_key }}
+          operation: upload
+          location: artifact
+          # github_token: ${{ secrets.gh_access_token }}
