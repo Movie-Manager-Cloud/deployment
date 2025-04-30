@@ -6,6 +6,18 @@ on:
         description: 'Confirm Destroy'
         required: true
         default: 'yes'
+      aws_access_key_id:
+          description: 'AWS Access Key ID'
+          required: true
+          default: ''
+      aws_secret_access_key:
+        description: 'AWS Secret Access Key'
+        required: true
+        default: ''
+
+env:
+  AWS_SECRET_ACCESS_KEY: ${{ github.event.inputs.aws_secret_access_key }}
+  AWS_ACCESS_KEY_ID: ${{ github.event.inputs.aws_access_key_id }}
 
 jobs:
   artifact_decrypted:
