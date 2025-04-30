@@ -33,7 +33,7 @@ jobs:
         id: access-token
         with:
           permissions: |
-              action: read
+              actions: read
 
       - name: Download Encrypted Artifact & Decrypt Artifact
         uses: badgerhobbs/terraform-state@v2
