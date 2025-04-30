@@ -27,13 +27,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - uses: qoomon/actions--access-token@v3
+        id: access-token
+        with:
+          permissions: |
+              action: read
+
       - name: Download Encrypted Artifact & Decrypt Artifact
         uses: badgerhobbs/terraform-state@v2
         with:
           encryption_key: ${{ secrets.encryption_key }}
           operation: download
           location: artifact
-          github_token: ${{ secrets.gh_access_token }}
+          github_token: ${{ steps.access-token.outputs.token }}
         continue-on-error: true
 
       - name: Configure Terraform
