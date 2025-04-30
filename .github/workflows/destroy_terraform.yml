@@ -22,6 +22,8 @@ env:
 jobs:
   artifact_decrypted:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     name: Artifact Decrypted
     steps:
       - name: Checkout repository
