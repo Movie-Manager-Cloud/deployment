@@ -30,6 +30,11 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
+      - name: Configure Kubectl
+        run: |
+          chmod +x configure_kubectl.sh
+          ./configure_kubectl.sh
+      
       - name: Destroy Helm
         run: |
           chmod +x delete_helm.sh
