@@ -33,7 +33,7 @@ statements:
     permissions: # https://docs.github.com/en/rest/authentication/permissions-required-for-github-apps
       # === Repository permissions ===
       #
-      # actions: read # read or write
+      actions: read # read or write
       # actions-variables: read # read or write
       # administration: read # read or write - BE AWARE 'administration' scope can not be completely limited to a repository e.g. create new repositories is still possible
       # checks: read # read or write
@@ -41,7 +41,7 @@ statements:
       # codespaces-lifecycle-admin: read # read or write
       # codespaces-metadata: read # read or write
       # codespaces-secrets: read # write
-      # contents: read # read or write
+      contents: read # read or write
       # custom-properties: read # read or write
       # dependabot-secrets: read # read or write
       # deployments: read # read or write
