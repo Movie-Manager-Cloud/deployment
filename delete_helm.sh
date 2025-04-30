@@ -10,6 +10,9 @@ echo "Uninstalling Helm releases..."
 echo "Uninstalling backend..."
 helm uninstall backend || echo "Release 'backend' not found or uninstall failed."
 
+echo "Uninstalling frontend..."
+helm uninstall frontend || echo "Release 'frontend' not found or uninstall failed."
+
 echo "Uninstalling postgres..."
 helm uninstall postgres || echo "Release 'postgres' not found or uninstall failed."
 
