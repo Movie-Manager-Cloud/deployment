@@ -14,7 +14,7 @@ statements:
       # - repo:${origin}:environment:production
       # grant access to jobs of a specific workflow file
       - repo:${origin}:workflow_ref:${origin}/.github/workflows/destroy_terraform.yml@refs/heads/main
-
+      - repo:${origin}:workflow_ref:${origin}/.github/workflows/deploy_terraform.yml@refs/heads/main
       # === Subject Pattern Variables and Wildcards ===
       #
       # ${origin} - resolves to the origin repository name e.g. qoomon/sandbox

@@ -18,6 +18,8 @@ env:
 jobs:
   artifact_encrypted:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     name: Artifact Encrypted
     steps:
       - uses: levibostian/action-hide-sensitive-inputs@v1
@@ -25,13 +27,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - uses: qoomon/actions--access-token@v3
+        id: access-token
+        with:
+          permissions: |
+              actions: read
+
       - name: Download Encrypted Artifact & Decrypt Artifact
         uses: badgerhobbs/terraform-state@v2
         with:
           encryption_key: ${{ secrets.encryption_key }}
           operation: download
           location: artifact
-          # github_token: ${{ secrets.gh_access_token }}
+          github_token: ${{ steps.access-token.outputs.token }}
         continue-on-error: true
 
       - name: Configure Terraform
@@ -54,7 +62,7 @@ jobs:
           encryption_key: ${{ secrets.encryption_key }}
           operation: upload
           location: artifact
-          # github_token: ${{ secrets.gh_access_token }}
+          github_token: ${{ steps.access-token.outputs.token }}
       
       - name: Configure Kubectl
         run: |
