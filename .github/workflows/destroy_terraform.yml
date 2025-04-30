@@ -10,7 +10,7 @@ on:
 jobs:
   artifact_decrypted:
     runs-on: ubuntu-latest
-    name: Artifact Encrypted
+    name: Artifact Decrypted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
           encryption_key: ${{ secrets.encryption_key }}
           operation: download
           location: artifact
-          # github_token: ${{ secrets.gh_access_token }}
+          github_token: ${{ secrets.gh_access_token }}
         continue-on-error: true
 
       - name: Configure Terraform
