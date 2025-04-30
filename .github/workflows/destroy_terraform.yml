@@ -27,6 +27,9 @@ jobs:
       - name: Configure Terraform
         uses: hashicorp/setup-terraform@v3
       
+      - name: Initialize Terraform
+        run: terraform init
+
       - name: Destroy Helm
         run: |
           chmod +x delete_helm.sh
