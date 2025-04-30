@@ -27,6 +27,11 @@ jobs:
       - name: Configure Terraform
         uses: hashicorp/setup-terraform@v3
       
+      - name: Destroy Helm
+        run: |
+          chmod +x delete_helm.sh
+          ./delete_helm.sh
+      
       - name: Check Confirm Destroy Input
         if: ${{ github.event.inputs.confirm_destroy != 'yes' }}
         run: |

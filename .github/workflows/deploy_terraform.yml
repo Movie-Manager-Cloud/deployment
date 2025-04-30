@@ -53,3 +53,13 @@ jobs:
           operation: upload
           location: artifact
           # github_token: ${{ secrets.gh_access_token }}
+      
+      - name: Configure Kubectl
+        run: |
+          chmod +x configure_kubectl.sh
+          ./configure_kubectl.sh
+      
+      - name: Deploy Helm Chart
+        run: |
+          chmod +x ./deploy_helm.sh
+          ./deploy_helm.sh
